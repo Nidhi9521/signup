@@ -1,0 +1,17 @@
+Assignment
+    create one const that require express
+    create json that require express
+    create app that is object of express
+
+    create fs const that import fs
+    with help of use function call express.json
+
+    with the help of listen function we listen on 3000 port number
+    
+    for getting all data from json create get method that read complete jso file data and print on server
+
+    create one get that return json data based on id is equal to employee and all assignment array
+
+    create one get method that return data based on employee id and also assignment id is equal to data we found it from json file that we have to return to server
+
+    create one get method that return data based on employee id and also assignment id is equal to data we found it from json file that we have to update assignment json and update json file like updation
