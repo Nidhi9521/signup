@@ -1,0 +1,44 @@
+Practice1
+    create const express that require express
+
+    create LoggedMiddleware function that having request, response and next with the log of data and next call
+
+    create const app that is object of express
+
+    create get method that return json result to server
+
+    create post method that return json result to server
+
+
+Practice2
+    create express const that require express
+
+    create const that is object of exprss
+
+    create const routes that is object of expressRoutes
+
+    create routes use method that is return request response and next that is log Time so we can know what time log is print
+
+    create routes get method that chek id we get from url and based on that we have to return log request url and next
+
+    create use routes
+
+    create listen method that listen on 3000 port number
+
+Practice3
+    create one const that require express
+    create json that require express
+    create app that is object of express
+
+    create fs const that import fs
+    with help of use function call express.json
+
+    with the help of listen function we listen on 3000 port number
+
+    create get method that hase url and based on that return request and response in implement readFile employee.json andwrite that data on server so user can see
+
+    create get function that having url and based on that pass request and response and that response readFile form json and find out that employee id is equal to url passed id that we data we have to print on server read 
+
+    create put function that is update json based on id we have to check that and update that objcet data
+
+    based on that write updated data in json also
