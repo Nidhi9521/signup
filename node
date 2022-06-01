@@ -1,0 +1,58 @@
+let express = require("express");
+const { json } = require("express");
+let app = express();
+
+let fs = require("fs");
+
+app.use(express.json())
+
+
+app.listen(3000, () => {
+    console.log("Server is listing on 3000 port")
+})
+
+app.get("/employee", (req, res) => {
+    fs.readFile("employee.json", (err, data) => {
+        res.send(JSON.parse(data));
+        res.end();
+    })
+})
+
+app.get("/employee/:id", (req, res) => {
+    data1 = [];
+    fs.readFile("./employee.json", "utf-8", (err, data) => {
+        data1 = JSON.parse(data);
+        console.log(data1);
+        const result = data1.find(c => c.id === parseInt(req.params.id));
+        console.log(result);
+        // console.log(data1);
+        res.send(result);
+        res.end();
+    })
+})
+
+app.put("/employee/update/:id", (req, res) => {
+    data1 = [];
+    fs.readFile("./employee.json", "utf-8", (err, data) => {
+        data1 = JSON.parse(data);
+        const result = data1.find((data) => {
+            return data.id === parseInt(req.params.id);
+        })
+        console.log(result);
+        console.log(data1);
+        result.name = req.body.name;
+        result.displayName=req.body.displayName;
+        result.dLno=req.body.dLno;
+        result.DOB=req.body.DOB;
+        result.phnNum=req.body.phnNum;
+        result.address=req.body.address;
+        result.state=req.body.state;
+        result.country=req.body.country;
+
+        fs.writeFile("./employee.json", JSON.stringify(data1), (err) => {
+            console.log("File written");
+        })
+        res.send(data1);
+        res.end();
+    })
+})
