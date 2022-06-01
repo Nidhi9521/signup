@@ -1,0 +1,77 @@
+let express = require("express");
+const { json } = require("express");
+let app = express();
+
+let fs = require("fs");
+app.use(express.json())
+
+app.get("/employee", (req, res) => {
+    fs.readFile("employee.json", (err, data) => {
+        res.send(JSON.parse(data));
+        res.end();
+    })
+})
+
+app.get("/employee/:id/child/assignment", (req, res) => {
+    data1 = [];
+    fs.readFile("employee.json", (err, data) => {
+
+        data1 = JSON.parse(data);
+        const result = data1.find((data) => {
+            return data.id === parseInt(req.params.id);
+        })
+        console.log(result);
+        console.log(data1);
+        res.send(result);
+        res.end();
+    })
+})
+
+
+app.get("/employee/:id/child/assignment/:aid", (req, res) => {
+    data1 = [];
+    fs.readFile("employee.json", (err, data) => {
+        data1 = JSON.parse(data);
+        const result = data1.find((data) => {
+            return data.id === parseInt(req.params.id);
+        })
+        var ass = result.Assignment;
+        const result1 = ass.find((d) => d.AssignmentId === parseInt(req.params.aid))
+        console.log(result1);
+        console.log(data1);
+        res.send(result1);
+        res.end();
+    })
+})
+
+app.put("/employee/:id/child/assignment/:aid", (req, res) => {
+    data1 = [];
+    fs.readFile("employee.json", (err, data) => {
+        data1 = JSON.parse(data);
+        const result = data1.find((data) => {
+            return data.id === parseInt(req.params.id);
+        })
+        var ass = result.Assignment;
+        const result1 = ass.find((d) => {
+            if (d.AssignmentId === parseInt(req.params.aid)) {
+                d.AssignmentNumber = req.body.AssignmentNumber;
+                d.ActualTerminationDate = req.body.ActualTerminationDate;
+                d.AssignmentStatus = req.body.AssignmentStatus;
+                d.endDate = req.body.endDate;
+            }
+            return d.AssignmentId === parseInt(req.params.aid)
+        })
+        console.log(result1);
+        fs.writeFile("./employee.json", JSON.stringify(data1), (err) => {
+            console.log("File written");
+        })
+        res.send(data1);
+        res.end();
+    })
+})
+
+
+
+app.listen(3000, () => {
+    console.log("Server is listing on 3000 port")
+})
